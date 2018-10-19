@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Header from './Header.js';
+import Search from './Search.js';
 
 const App = () => {
   return (
@@ -9,6 +10,7 @@ const App = () => {
       <div className="container">
         <h1>Lista de proyectos de GitHub!</h1>
       </div>
+      <Search />
     </div>
   );
 };
