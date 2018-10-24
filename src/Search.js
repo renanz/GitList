@@ -1,10 +1,7 @@
-// import React from 'react';
 // import { library } from '@fortawesome/fontawesome-svg-core'
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // import { faCheckCircle } from '@fortawesome/free-solid-svg-icons'
-
 // library.add(faCheckCircle)
-
 // const Search = () => {
 //   return (
 //     <div className="search" align="center">
@@ -13,18 +10,24 @@
 //     </div>
 //   );
 // };
-
-// export default Search;
-
 import React from 'react';
+import Header from './Header.js';
+import PropTypes from 'prop-types';
 
-const Search = () => {
+const Search = ({ onSubmitUsername }) => {
+  const handleSubmit = e => {
+    e.preventDefault();
+    const username = e.target.username.value;
+    if (onSubmitUsername && username) {
+      onSubmitUsername(username);
+    }
+  };
   return (
     <div>
-      
+      <Header />
       <div className="container">
         <section className="search six offset-by-three columns">
-          <form>
+          <form onSubmit={handleSubmit}>
             <button type="submit">
               <span className="fa fa-check-circle fa-3x" />
             </button>
@@ -39,6 +42,10 @@ const Search = () => {
       </div>
     </div>
   );
+};
+
+Search.propTypes = {
+  onSubmitUsername: PropTypes.func
 };
 
 export default Search;
