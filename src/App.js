@@ -2,14 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Search from './Search.js';
 import { BrowserRouter, Route } from 'react-router-dom';
+import ListProjects from './ListProject';
 
 const App = () => {
   return (
-    <div>
-      <div className="container">
-        <h1 />
-      </div>
-      <BrowserRouter>
+    <BrowserRouter>
+      <div>
         <Route
           exact
           path="/"
@@ -21,8 +19,9 @@ const App = () => {
             />
           )}
         />
-      </BrowserRouter>
-    </div>
+        <Route exact path="/:username/projects" component={ListProjects} />
+      </div>
+    </BrowserRouter>
   );
 };
 
