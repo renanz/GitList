@@ -35,6 +35,11 @@ class ListProjects extends Component {
         <div className="container list">
           <section className="eight offset-by-two columns">
             <h4>Projects</h4>
+            <p>
+              {this.state.projects.map(data => (
+                <li key={data.id}> {data.name}</li>
+              ))}{' '}
+            </p>
           </section>
         </div>
       </div>
