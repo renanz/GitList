@@ -47,6 +47,11 @@ _________________________________________________ */
   background: transparent;
 }
 
+.list-projects{
+  list-style: none;
+  text-align: center;
+}
+
 /* Grid
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 .container {
@@ -310,7 +315,9 @@ label > .label-body {
 /* Lists
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 ul {
-  list-style: circle inside; }
+  list-style: none;
+  text-align: center;
+}
 ol {
   list-style: decimal inside; }
 ol, ul {
