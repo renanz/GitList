@@ -7,7 +7,7 @@ const ReactMarkdown = require('react-markdown');
 class Details extends Component {
   constructor(props) {
     super(props);
-    this.state = { name: ' ', readme: ' ',  username: ' '};
+    this.state = { name: '', readme: '', username: '' };
   }
 
   componentDidMount() {
@@ -27,20 +27,31 @@ class Details extends Component {
           .get(`${url}`)
           .then(res =>
             this.setState(() => ({
-              readme: res.data, 
+              readme: res.data,
               name: params.repoName,
               username: params.username
             }))
           )
-          .catch(err => console.log(err.message)); //eslint-disable-line
+          .catch(err2 => console.log(err2.message)); //eslint-disable-line
       })
-      .catch(err => console.log(err.message)); //eslint-disable-line
+      .catch(err => {
+        console.log(err.message); //eslint-disable-line
+        this.setState(() => ({
+          readme: 'No hay readme disponible',
+          name: params.repoName,
+          username: params.username
+        }));
+      });
   }
 
   render() {
     return (
       <div>
-        <Header history={this.props.history} display={this.state.name} push={`/${this.state.username}/projects`}/>
+        <Header
+          history={this.props.history}
+          display={this.state.name}
+          push={`/${this.state.username}/projects`}
+        />
         <div className="container list">
           <section className="eight offset-by-two columns">
             <br />
