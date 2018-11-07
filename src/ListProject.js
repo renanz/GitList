@@ -7,40 +7,61 @@ class ListProjects extends Component {
   //herencia
   constructor(props) {
     super(props);
-    this.state = { projects: [] };
+    this.state = { projects: [], user:''};
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(event) {
+    event.preventDefault();
+    let name = event.target.id;
+    if (this.props.history && name) {
+      this.props.history.push(`/${name}/readme`);
+    }
   }
 
   componentDidMount() {
     //llamados al backend
     //eslint-disable-next-line
-    console.log(this.props);
     const {
       match: { params }
     } = this.props;
     axios
       .get(`https://api.github.com/users/${params.username}/repos`)
-      .then(projects =>
+      .then(projects => {
         this.setState(() => ({
           //despues de que se conecto al servidor, obtenemos los datos
-          projects: projects.data //projects.data es un array, esto es de axios
-        }))
-      )
+          projects: projects.data, //projects.data es un array, esto es de axios
+          user: params.username
+        }));
+      })
       .catch(err => console.log(err.message)); //eslint-disable-line
   }
 
   render() {
     return (
       <div>
-        <Header />
+        <Header history={this.props.history} display={this.state.user} push={'/'}/>
         <div className="container list">
           <section className="eight offset-by-two columns">
-            <br/><br/>
-            <h4><b>Projects</b></h4>
-            <ul className="ul">
-              {this.state.projects.map(data => (
-                <li key={data.id}> {data.name}</li>
-              ))}{' '}
-            </ul>
+            <br />
+            <br />
+            <h4>
+              <b>Projects</b> 
+            </h4>
+            <div className="card">
+              <ul className="ul" onSubmit={this.handleSubmit}>
+                {this.state.projects.map(data => (
+                  <li className="card-1" key={data.id}>
+                    <a
+                      id={`${data.full_name}`}
+                      onClick={this.handleClick}
+                    >
+                      {data.name}
+                    </a>
+                  </li>
+                ))}{' '}
+              </ul>
+            </div>
           </section>
         </div>
       </div>

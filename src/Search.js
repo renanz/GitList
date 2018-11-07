@@ -14,17 +14,17 @@ import React from 'react';
 import Header from './Header.js';
 import PropTypes from 'prop-types';
 
-const Search = ({ onSubmitUsername }) => {
+const Search = (props) => {
   const handleSubmit = e => {
     e.preventDefault();
     const username = e.target.username.value;
-    if (onSubmitUsername && username) {
-      onSubmitUsername(username);
+    if (props.onSubmitUsername && username) {
+      props.onSubmitUsername(username);
     }
   };
   return (
     <div>
-      <Header />
+      <Header display={'Search'} search={true}/>
       <div className="container">
         <section className="search six offset-by-three columns">
           <form onSubmit={handleSubmit}>
